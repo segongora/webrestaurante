@@ -15,8 +15,10 @@
             
             <div>
               <p>{{recipe.content|striptags|safe|truncatechars:"200"}}</p>
-              <p><a href="{% url 'recipes:recipe' recipe.id recipe.title|slugify %}">Leer más</a>              
-              </p>
+              <p><a href="{% url 'recipes:recipe' recipe.id recipe.title|slugify %}">Leer más</a></p>
+
+              <a class="btn btn-success" onclick="agregarCarrito({{recipe.id}});" role="button"> Agregar al carrito</a>
+
             {% if request.user.is_staff %}
             <a class="btn btn-primary" href="{% url 'recipes:update' recipe.id %}" role="button"> Editar</a>
             <a class="btn btn-primary" href="{% url 'recipes:delete' recipe.id %}" role="button"> Borrar</a>
@@ -31,4 +33,23 @@
                
     {% endfor %}
   </div>
+{% endblock %}
+
+{% block contentJS %} 
+  
+  <script>
+    function agregarCarrito(id){
+      if (cart[id] != undefined){
+        cart[id] += 1;
+      }else{
+        cart[id] = 1;
+      }
+      //Se coloca en el localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+      show_badge_cart();
+   }
+
+
+  </script>
+
 {% endblock %}

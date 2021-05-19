@@ -6,12 +6,15 @@
 <main role="main">
   <div class="container">
     <div class="row mt-3">
-      <div class="col-md-9 mx-auto text-light">
+      <div class="col-md-12 mx-auto text-light">
         <div>
         <form action="" method="post">{% csrf_token %}
-        <p>¿Seguro que quieres eliminar esta receta ?{{ object.title }}"?</p>
-        <input type="submit" value="Confirm">
+        <p>¿Seguro que quieres eliminar <b>{{ object.title }}</b>?</p>
+        <p class="text-light">Esta acción no se puede deshacer.</p>
+        <a class="btn btn-light" href="javascript:history.back()" >Cancelar</a>
+        <input class="btn btn-danger" type="submit" value="Confirmar">
         </form>
+        <div class="py-4"></div>
         </div>
       </div>
     </div>

@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %} 
+ {% block title %} Salsas{% endblock %}
+{% block content %} {% load static %}
+
+
+    <section class="page-section cta">
+      <div class="container">
+        <div class="col-md-12 text-white text-center mb-5 py-2"><h1 style="font-size: 55px; font-weight: 200;">Salsas Deluxe</h1></div>
+        <div class="row">
+            {% for salsa in salsas %}
+          <div class="col-md-6">
+            <div class="cta-innerv text-center rounded">
+              <h2 class="section-heading mb-5">
+                <span class="section-heading-upper">{{ salsa.created|date:"d/m/Y" }}</span>
+                <span class="section-heading-lower">{{ salsa.name }}</span>
+              </h2>
+              <p class="mb-0">
+                <img class="mx-auto d-flex rounded img-fluid mb-3 mb-lg-0"  src="{{salsa.image.url }}" alt="">
+              </p>
+              <p class="mb-0 mbt text-left"><b>Descripción:</b><br>
+                {{salsa.content|striptags|safe}}           
+              </p>
+              <p class="mb-0 mbt">
+                <span class="section-heading-under">${{ salsa.price }}.00
+              </p>
+              <a class="btn btn-success" onclick="agregarCarrito({{salsa.id}});" role="button"> Agregar al carrito</a>
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+{% endblock %}
+
+{% block contentJS %} 
+  
+  <script>
+    function agregarCarrito(id){
+      if (cart[id] != undefined){
+        cart[id] += 1;
+      }else{
+        cart[id] = 1;
+      }
+      //Se coloca en el localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+      show_badge_cart();
+   }
+
+
+  </script>
+
+{% endblock %}

@@ -20,6 +20,8 @@ from Services import views as views_services
 from blog import views 
 from django.conf import settings
 from recipe.urls import recipe_patterns
+from salsas.urls import salsas_patterns
+
 
 urlpatterns = [
     path('', include('core.urls')),
@@ -28,10 +30,9 @@ urlpatterns = [
     path('blog/', include('blog.urls')),
     path('admin/', admin.site.urls),
     #path('recipe/', include('recipe.urls)),
-    path('recipe/',include(recipe_patterns)),
+  #  path('recipe/',include(recipe_patterns)),
     path('contact/', include('contact.urls')),
-
-
+    path('salsas/', include(salsas_patterns)),
 ]
 
 
